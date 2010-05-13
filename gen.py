@@ -1,3 +1,4 @@
+from contextlib import nested
 import operator
 import random
 import re
@@ -6,8 +7,13 @@ import sys
 import yaml
 
 def main():
-    with open(sys.argv[1]) as file:
-        gen(file.read(), ["sound"])
+    init_syms = sys.argv[1].split()
+
+    with nested(*[open(f) for f in sys.argv[2:]]) as fs:
+        grammars = [f.read() for f in fs]
+
+    compose(init_syms, *grammars)
+
 
 class Expansion(object):
 

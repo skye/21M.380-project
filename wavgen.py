@@ -9,7 +9,7 @@ from scikits.audiolab import *
 
 import gen
 
-DEFAULT_GRAMMARS = ['sound.yaml']
+DEFAULT_GRAMMARS = ['chord.yaml', 'notes.yaml', 'sound.yaml']
 
 SAMPLE_RATE = 44100
 DURATION = 2

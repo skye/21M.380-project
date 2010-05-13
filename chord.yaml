@@ -6,3 +6,16 @@ chord:
 - D F A : 1  # D (ii)
 - B E G : 1  # E (iii)
 - B D F : 1  # B (vii)
+
+major:
+- C E G : 1  # C (I)
+- C F A : 1  # F (VI)
+- D G B : 1  # G (V)
+
+minor:
+- A C E : 1  # A (vi)
+- D F A : 1  # D (ii)
+- B E G : 1  # E (iii)
+
+diminished:
+- B D F : 1  # B (vii)

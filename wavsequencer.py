@@ -29,6 +29,9 @@ def main():
 def create_sequence(wavgen_syms, *grammars):
     # Expand each sym individually
     sym_lists = [gen.compose([sym], *grammars) for sym in wavgen_syms]
+    
+    print "Sequence:"
+    for sym_list in sym_lists: print sym_list
 
     # Create wav data from each expanded symbol
     datas = [wavgen.process(syms) for syms in sym_lists]
