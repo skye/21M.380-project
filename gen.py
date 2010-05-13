@@ -22,9 +22,8 @@ class Expansion(object):
             n = n - weight
 	return choice
 
-def gen(file, symbols):
-    with open(sys.argv[1]) as file:
-        productions = parse(file)
+def gen(grammar, symbols):
+    productions = parse(grammar)
 
     print symbols
     changed = True
@@ -80,14 +79,14 @@ def expand_symbol(symbol, expansions):
 
     return (expansions[symbol].choose_expansion(), True)
 
-def parse(file):
+def parse(grammar):
     """Returns a symbol->Expansion mapping.
 
     file -- file object of productions
 
     """
     productions = {}
-    raw_prods = yaml.load(file)
+    raw_prods = yaml.load(grammar)
 
     # raw_expansion = [{var:prob}, ...]
     for symbol, raw_expansion in raw_prods.items():
@@ -102,7 +101,7 @@ def parse(file):
     
 def main():
     with open(sys.argv[1]) as file:
-        gen(file, ["sound"])
+        gen(file.read(), ["sound"])
 
 def normalize(nums):
     """Normalize a list of numbers so they sum to one."""

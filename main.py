@@ -7,7 +7,7 @@ import wavgen
 wav_file = 'test.wav'
 
 with open(sys.argv[1]) as f:
-    symbols = gen.gen(f, ['sound'])
+    symbols = gen.gen(f.read(), ['sound'])
 
 wavgen.process(symbols, wav_file)
 
