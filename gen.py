@@ -5,6 +5,10 @@ import sys
 
 import yaml
 
+def main():
+    with open(sys.argv[1]) as file:
+        gen(file.read(), ["sound"])
+
 class Expansion(object):
 
     def __init__(self, choices):
@@ -109,10 +113,6 @@ def parse(grammar):
 
     return productions
     
-def main():
-    with open(sys.argv[1]) as file:
-        gen(file.read(), ["sound"])
-
 def normalize(nums):
     """Normalize a list of numbers so they sum to one."""
     n = float(sum(nums))
