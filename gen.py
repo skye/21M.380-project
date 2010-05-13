@@ -63,6 +63,13 @@ def expand_symbol(symbol, expansions):
         else:
             return ([symbol[:-1], symbol], True)
 
+    # sym+ -> sym | [sym sym*]
+    if symbol.endswith("+"):
+        if random.random() > .5:
+            return (symbol[:-1], True)
+        else:
+            return ([symbol[:-1], symbol[:-1]+"*"], True)        
+
     # [lo - hi] -> integer in range [lo, hi]
     def rangerepl(match):
         lo = int(match.group(1))
