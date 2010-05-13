@@ -21,8 +21,8 @@ def main():
         grammars = [f.read() for f in fs]
 
     symbols = gen.compose(init_syms, *grammars)
-
-    process(symbols, wav_file)
+    data = process(symbols)
+    write_wav(data, wav_file)
 
     subprocess.call('totem %s' % wav_file, shell=True)
 
@@ -79,7 +79,7 @@ def parse_symbol(symbol):
 
     return (lambda data: op(data, wave))
 
-def process(symbols, output_file='test.wav'):
+def process(symbols):
     samples = DURATION*SAMPLE_RATE
 
     # Start with empty (zero) waveform
@@ -92,6 +92,9 @@ def process(symbols, output_file='test.wav'):
     # Normalize data
     data = scale(data)
         
+    return data
+
+def write_wav(data, output_file='test.wav'):
     wavwrite(data, output_file, fs=SAMPLE_RATE)
 
 def scale(data, max_val=1):
