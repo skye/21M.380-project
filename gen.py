@@ -54,6 +54,7 @@ def gen(grammar, symbols):
 def compose(init_syms, *grammars):
     """Use the output of each grammar as the input to the next grammar."""
     symbols = init_syms
+    symbols = gen("", symbols)
     for grammar in grammars:
         symbols = gen(grammar, symbols)
     return symbols
@@ -107,6 +108,10 @@ def parse(grammar):
     """
     productions = {}
     raw_prods = yaml.load(grammar)
+
+    if raw_prods is None:
+        # Empty grammar
+        return productions
 
     # raw_expansion = [{var:prob}, ...]
     for symbol, raw_expansion in raw_prods.items():
