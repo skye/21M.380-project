@@ -68,7 +68,7 @@ def expand_symbol(symbol, expansions):
     # sym+ -> sym | [sym sym*]
     if symbol.endswith("+"):
         if random.random() > .5:
-            return (symbol[:-1], True)
+            return ([symbol[:-1]], True)
         else:
             return ([symbol[:-1], symbol[:-1]+"*"], True)        
 
