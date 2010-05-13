@@ -1,0 +1,40 @@
+# frequencies from http://ptolemy.eecs.berkeley.edu/eecs20/week8/scale.html
+
+A:
+- sin(440) : 1
+
+Bb:
+- sin(466) : 1
+
+B:
+- sin(494) : 1
+
+C:
+- sin(523) : 1
+
+Db:
+- sin(554) : 1
+
+D:
+- sin(587) : 1
+
+Eb:
+- sin(622) : 1
+
+E:
+- sin(659) : 1
+
+F:
+- sin(698) : 1
+
+Gb:
+- sin(740) : 1
+
+G:
+- sin(784) : 1
+
+Ab:
+- sin(831) : 1
+
+A2:
+- sin(880) : 1
