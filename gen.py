@@ -21,6 +21,10 @@ class Expansion(object):
 	return choice
 
 def gen(grammar, symbols):
+    # Empty symbol lists cannot be expanded
+    if not symbols:
+        return symbols
+
     productions = parse(grammar)
 
     print symbols
