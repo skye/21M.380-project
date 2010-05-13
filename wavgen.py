@@ -1,11 +1,31 @@
+from contextlib import nested
 import operator
 import re
+import subprocess
+import sys
 
 from numpy import *
 from scikits.audiolab import *
 
+import gen
+
 SAMPLE_RATE = 44100
 DURATION = 4
+
+def main():
+    wav_file = 'test.wav'
+
+    init_syms = sys.argv[1].split()
+
+    with nested(*[open(f) for f in sys.argv[2:]]) as fs:
+        grammars = [f.read() for f in fs]
+
+    symbols = gen.compose(init_syms, *grammars)
+
+    process(symbols, wav_file)
+
+    subprocess.call('totem %s' % wav_file, shell=True)
+
 
 def sinWave(freq=440, amp=1, dur=DURATION):
     # calculations adapted from http://codingmess.blogspot.com/2008/07/how-to-make-simple-wav-file-with-python.html
@@ -79,6 +99,4 @@ def scale(data, max_val=1):
     return array([scale_factor*i for i in data])
 
 if __name__ == '__main__':
-    data = sinWave()
-    data *= sawtoothWave()
-    wavwrite(data, 'test.wav', fs=SAMPLE_RATE)
+    main()
