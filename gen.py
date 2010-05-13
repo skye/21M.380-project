@@ -36,13 +36,14 @@ def gen(grammar, symbols):
         changed = any(changedLst)
         if changed: print symbols
 
+    print ''
     return symbols
     
 def compose(init_syms, *grammars):
     """Use the output of each grammar as the input to the next grammar."""
     symbols = init_syms
     for grammar in grammars:
-        symbols = gen.gen(grammar, symbols)
+        symbols = gen(grammar, symbols)
     return symbols
 
 def expand_symbol(symbol, expansions):

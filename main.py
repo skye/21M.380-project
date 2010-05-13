@@ -1,3 +1,4 @@
+from contextlib import nested
 import subprocess
 import sys
 
@@ -6,9 +7,13 @@ import wavgen
 
 wav_file = 'test.wav'
 
-with open(sys.argv[1]) as f:
-    symbols = gen.gen(f.read(), ['sound'])
+init_syms = sys.argv[1].split()
 
+with nested(*[open(f) for f in sys.argv[2:]]) as fs:
+    grammars = [f.read() for f in fs]
+
+symbols = gen.compose(init_syms, *grammars)
+    
 wavgen.process(symbols, wav_file)
 
 subprocess.call('totem %s' % wav_file, shell=True)
