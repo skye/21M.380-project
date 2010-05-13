@@ -9,8 +9,10 @@ from scikits.audiolab import *
 
 import gen
 
+DEFAULT_GRAMMARS = ['sound.yaml']
+
 SAMPLE_RATE = 44100
-DURATION = 4
+DURATION = 2
 
 def main():
     wav_file = 'test.wav'
@@ -61,14 +63,15 @@ def parse_symbol(symbol):
         for prefix in prefixes:
             if string.startswith(prefix):
                 return prefix, string[len(prefix):]
-        raise Exception("no matching prefix in %s: %s" % (prefixes, string))
+        # default to add
+        return '+', string
 
     op_sym, remaining = eat(symbol, ops.keys())
     wave_sym, remaining = eat(remaining, waves.keys())
 
     match = re.match("\((\d*)\)", remaining)
     if match is None:
-        raise Exception("frequency not recognized")
+        raise Exception("frequency not recognized: "+remaining)
     freq = int(match.group(1))
 
     assert op_sym in ops

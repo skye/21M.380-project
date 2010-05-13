@@ -16,7 +16,11 @@ def main():
         grammars = [f.read() for f in fs]
 
     symbols = gen.compose(init_syms, *grammars)
-    data = create_sequence(symbols, *grammars)
+
+    with nested(*[open(f) for f in wavgen.DEFAULT_GRAMMARS]) as fs:
+        wavgen_grammars = [f.read() for f in fs]
+    
+    data = create_sequence(symbols, *wavgen_grammars)
     wavgen.write_wav(data, wav_file)
 
     subprocess.call('totem %s' % wav_file, shell=True)
