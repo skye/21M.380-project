@@ -12,7 +12,7 @@ import gen
 DEFAULT_GRAMMARS = ['chord.yaml', 'notes.yaml', 'sound.yaml']
 
 SAMPLE_RATE = 44100
-DURATION = 2
+DURATION = .2
 
 def main():
     wav_file = 'test.wav'
@@ -26,7 +26,9 @@ def main():
     data = process(symbols)
     write_wav(data, wav_file)
 
+    print "Wrote %s" % wav_file
     subprocess.call('totem %s' % wav_file, shell=True)
+
 
 
 def sinWave(freq=440, amp=1, dur=DURATION):

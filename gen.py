@@ -30,14 +30,14 @@ class Expansion(object):
             n = n - weight
 	return choice
 
-def gen(grammar, symbols):
+def gen(grammar, symbols, output=True):
     # Empty symbol lists cannot be expanded
     if not symbols:
         return symbols
 
     productions = parse(grammar)
 
-    print symbols
+    if output: print symbols
     changed = True
     while changed:
         symbolLsts, changedLst = zip(*[expand_symbol(sym, productions)
@@ -46,15 +46,15 @@ def gen(grammar, symbols):
         symbols = concat(symbolLsts)
         # Were any symbols expanded?
         changed = any(changedLst)
-        if changed: print symbols
+        if changed and output: print symbols
 
-    print ''
+    if output: print ''
     return symbols
     
 def compose(init_syms, *grammars):
     """Use the output of each grammar as the input to the next grammar."""
     symbols = init_syms
-    symbols = gen("", symbols)
+    symbols = gen("", symbols, output=False)
     for grammar in grammars:
         symbols = gen(grammar, symbols)
     return symbols
@@ -112,10 +112,9 @@ def parse(grammar):
 
     # raw_expansion = [{var:prob}, ...]
     for symbol, raw_expansion in raw_prods.items():
-        # Coerce list of dictionaries into list of tuples
-        varprobs = concat([d.items() for d in raw_expansion])
         # Split expansion string
-        varprobs = [(expansion.split(), prob) for expansion, prob in varprobs]
+        varprobs = [(expansion.split(), prob) 
+                    for expansion, prob in raw_expansion.items()]
         # Create Expansion using (choice, probability) tuples
         productions[symbol] = Expansion(varprobs)
 
