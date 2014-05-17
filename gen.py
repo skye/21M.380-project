@@ -9,6 +9,9 @@ import yaml
 def main():
     init_syms = sys.argv[1].split()
 
+    if len(sys.argv) < 1:
+        print "USAGE python gen.py <initial_sequence> <grammar>..."
+
     with nested(*[open(f) for f in sys.argv[2:]]) as fs:
         grammars = [f.read() for f in fs]
 

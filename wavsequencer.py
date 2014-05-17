@@ -10,6 +10,9 @@ import wavgen
 def main():
     wav_file = 'test.wav'
 
+    if len(sys.argv) < 1:
+        print "USAGE python wavsequencer.py <initial_sequence> <grammar>..."
+
     init_syms = sys.argv[1].split()
 
     with nested(*[open(f) for f in sys.argv[2:]]) as fs:

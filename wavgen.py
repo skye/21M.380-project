@@ -12,10 +12,13 @@ import gen
 DEFAULT_GRAMMARS = ['chord.yaml', 'notes.yaml', 'sound.yaml']
 
 SAMPLE_RATE = 44100
-DURATION = .2
+DURATION = 1
 
 def main():
     wav_file = 'test.wav'
+
+    if len(sys.argv) < 1:
+        print "USAGE python wavgen.py <initial_sequence> <grammar>..."
 
     init_syms = sys.argv[1].split()
 
